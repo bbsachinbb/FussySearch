@@ -3,7 +3,7 @@ import React, { Fragment, useState } from "react";
 export const SearchCard = ({ item, className, index, active }) => {
   const { id, name, address } = item;
   const [isHovering, setIsHovering] = useState(false);
-  console.log(index);
+ 
   const handleMouseOver = () => {
     setIsHovering(true);
   };
