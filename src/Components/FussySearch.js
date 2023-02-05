@@ -25,7 +25,6 @@ export const FussySearch = () => {
 
   const onChange = ({ target }) => {
     const { value } = target;
-
     setInput(value);
     const searchedData = fussySearch(monckData, value);
     setActive(0);
@@ -35,10 +34,12 @@ export const FussySearch = () => {
 
   function setChange() {
     const selected = selectedRef?.current?.querySelector(".active");
-    selected?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+    if (selected) {
+      selected?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
   }
 
   const onKeyDown = (e) => {
@@ -60,6 +61,7 @@ export const FussySearch = () => {
         placeholder="Search"
         onKeyDown={onKeyDown}
         value={input}
+        style={{ width: 300 }}
       />
       {isShow && input && (
         <ul
@@ -83,7 +85,15 @@ export const FussySearch = () => {
               setTimeout(() => {
                 setChange();
               }, [100]);
-              return <SearchCard key={index} item={item} />;
+              return (
+                <SearchCard
+                  className={className}
+                  key={index}
+                  index={index}
+                  active={active}
+                  item={item}
+                />
+              );
             })}
           {!filtered.length && (
             <div>
